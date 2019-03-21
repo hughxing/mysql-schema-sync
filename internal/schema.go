@@ -77,6 +77,9 @@ func ParseSchema(schema string) *MySchema {
 			index := strings.Index(line[1:], "`")
 			name := line[1 : index+1]
 			mys.Fields[name] = line
+		} else if line[0] == ')' {
+			// partitioned table lines length is not len(lines), ')' is accurate as the table end
+			break;
 		} else {
 			idx := parseDbIndexLine(line)
 			if idx == nil {
